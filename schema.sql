@@ -1,0 +1,18 @@
+CREATE TABLE job_listings (
+    id SERIAL PRIMARY KEY,
+    job_title TEXT NOT NULL,
+    company TEXT NOT NULL,
+    location TEXT,
+    work_arrangement TEXT CHECK (work_arrangement IN ('remote', 'hybrid', 'on-site')),
+    tech_stack TEXT[],
+    experience_level TEXT,
+    salary TEXT,
+    standout_details TEXT,
+    listing_url TEXT,
+    raw_description TEXT,
+    verdict TEXT CHECK (verdict IN ('Strong Match', 'Partial Match', 'Not a Fit')),
+    verdict_reasoning TEXT,
+    status TEXT DEFAULT 'new' CHECK (status IN ('new', 'reviewed', 'applied', 'interviewing', 'offer', 'rejected')),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);

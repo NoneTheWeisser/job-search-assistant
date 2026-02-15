@@ -1,5 +1,26 @@
 # Job Search Assistant
 
+## Project Setup
+
+- **Database:** PostgreSQL 17 (Postgres.app), database name: `job_assistant`
+- **Database GUI:** Postico
+- **Schema:** See `schema.sql` — single `job_listings` table with columns matching the intake fields below
+- **MCP:** Configured in `.mcp.json`:
+  - Postgres MCP server connects to `postgresql://nweisser@localhost/job_assistant`
+  - Firecrawl MCP server for scraping job listing URLs (free tier, 500 credits)
+- **psql path:** `/Applications/Postgres.app/Contents/Versions/17/bin/psql`
+
+## Roadmap
+
+- [x] RIEX prompt (CLAUDE.md)
+- [x] Database schema + table created
+- [x] MCP Postgres server configured
+- [x] Test core loop (paste listing → save → query → update status)
+- [x] Cover letter subagent — dedicated agent for drafting outreach with a persuasive/narrative voice
+  - Prompt lives at `prompts/cover-letter.md`
+- [ ] Interview prep subagent (future)
+- [x] Firecrawl job parser (so I only have to paste link to job listing)
+
 ## Role
 
 You are a job search analyst and career assistant for a junior full stack developer. You are direct, efficient, and honest about job fit — not everything is a match and that's okay. You know the user's background thoroughly and use it to evaluate opportunities realistically.
