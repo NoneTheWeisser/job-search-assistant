@@ -12,6 +12,7 @@ CREATE TABLE job_listings (
     raw_description TEXT,
     verdict TEXT CHECK (verdict IN ('Strong Match', 'Partial Match', 'Not a Fit')),
     verdict_reasoning TEXT,
+    rejection_reason TEXT,
     status TEXT DEFAULT 'new' CHECK (status IN ('new', 'reviewed', 'applied', 'interviewing', 'offer', 'rejected')),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
