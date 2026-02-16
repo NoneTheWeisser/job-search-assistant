@@ -15,5 +15,6 @@ CREATE TABLE job_listings (
     rejection_reason TEXT,
     status TEXT DEFAULT 'new' CHECK (status IN ('new', 'reviewed', 'applied', 'interviewing', 'offer', 'rejected')),
     created_at TIMESTAMP DEFAULT NOW(),
+    role_type TEXT DEFAULT 'dev',
     updated_at TIMESTAMP DEFAULT NOW()
 );
