@@ -11,6 +11,7 @@ A Claude Code-powered job search tracker and career assistant built for a junior
 - **Track applications** - Listings are saved to a PostgreSQL database with status tracking (new, reviewed, applied, interviewing, offer, rejected)
 - **Query on demand** - Filter stored listings by status, verdict, or other criteria
 - **Draft cover letters** - Dev roles use a junior developer cover letter subagent; design roles use a design-focused subagent. Both connect background to specific job requirements
+- **Interview prep** - When you ask to prep for an interview, a subagent generates a tailored prep sheet: company research, technical questions (dev or design-focused), STAR-format behavioral answers, career change talking points, and questions to ask. Export goes to `interview-prep/`
 - **Scrape job URLs** - Two scrapers: one for dev roles (tech stack extraction), one for design roles (tools/software extraction). Firecrawl MCP integration lets me paste a URL instead of copying the full listing text (works best with company career pages)
 
 ## Tech Stack
@@ -30,9 +31,11 @@ A Claude Code-powered job search tracker and career assistant built for a junior
 ├── prompts/
 │   ├── cover-letter.md          # Cover letter subagent (dev roles)
 │   ├── design-cover-letter.md   # Cover letter subagent (design roles)
+│   ├── interview-prep.md        # Interview prep subagent (dev or design)
 │   ├── job-scraper.md           # Job scraper subagent (dev roles)
 │   └── design-job-scraper.md    # Job scraper subagent (design roles)
 ├── cover-letters/            # Exported cover letter drafts (gitignored)
+├── interview-prep/           # Exported interview prep sheets (gitignored)
 ├── .mcp.json                 # MCP server config (gitignored, contains API keys)
 ├── .gitignore
 └── README.md
@@ -48,7 +51,8 @@ A Claude Code-powered job search tracker and career assistant built for a junior
    - **Not a Fit** → discarded
 4. Ask for a **cover letter** and a subagent drafts one using your background and the job details
 5. Cover letters are exported to `cover-letters/` as markdown files
-6. **Update status** as you progress through the application process
+6. Ask to **prep for an interview** when you land one — a subagent generates a tailored prep sheet (company research, technical questions, STAR behavioral answers, career change talking points) and exports to `interview-prep/`
+7. **Update status** as you progress through the application process
 
 ## Setup
 
