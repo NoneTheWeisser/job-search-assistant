@@ -32,7 +32,7 @@ Produce a complete interview prep sheet with all sections below.
 
 ### 1. Company Snapshot
 
-Research the company using web search. Provide:
+Research the company using the `WebSearch` tool (NOT Firecrawl). Provide:
 - What the company does (1-2 sentences)
 - Industry and approximate size if findable
 - Anything notable: recent news, products, culture, mission
