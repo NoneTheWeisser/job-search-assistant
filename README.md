@@ -11,7 +11,7 @@ A Claude Code-powered job search tracker and career assistant built for a junior
 - **Track applications** - Listings are saved to a PostgreSQL database with status tracking (new, reviewed, applied, interviewing, offer, rejected)
 - **Query on demand** - Filter stored listings by status, verdict, or other criteria
 - **Draft cover letters** - Dev roles use a junior developer cover letter subagent; design roles use a design-focused subagent. Both connect background to specific job requirements
-- **Interview prep** - When you ask to prep for an interview, a subagent generates a tailored prep sheet: company research, technical questions (dev or design-focused), STAR-format behavioral answers, career change talking points, and questions to ask. Export goes to `interview-prep/`
+- **Interview prep** - When you ask to prep for an interview, a subagent generates a tailored prep sheet: company research (via web search, not Firecrawl), technical questions (dev or design-focused), STAR-format behavioral answers, career change talking points, and questions to ask. Export goes to `interview-prep/`
 - **Scrape job URLs** - Two scrapers: one for dev roles (tech stack extraction), one for design roles (tools/software extraction). Firecrawl MCP integration lets me paste a URL instead of copying the full listing text (works best with company career pages)
 
 ## Tech Stack
@@ -51,7 +51,7 @@ A Claude Code-powered job search tracker and career assistant built for a junior
    - **Not a Fit** → discarded
 4. Ask for a **cover letter** and a subagent drafts one using your background and the job details
 5. Cover letters are exported to `cover-letters/` as markdown files
-6. Ask to **prep for an interview** when you land one — a subagent generates a tailored prep sheet (company research, technical questions, STAR behavioral answers, career change talking points) and exports to `interview-prep/`
+6. Ask to **prep for an interview** when you land one — a subagent generates a tailored prep sheet (company research via web search, technical questions, STAR behavioral answers, career change talking points) and exports to `interview-prep/`
 7. **Update status** as you progress through the application process
 
 ## Setup
