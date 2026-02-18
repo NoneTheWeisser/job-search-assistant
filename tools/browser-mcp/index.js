@@ -243,6 +243,53 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
 
     {
+      name: "browser_get_text",
+      description:
+        "Extracts the visible text content of the current page (or a specific element). " +
+        "Use this to read job listing descriptions, requirements, and other page content " +
+        "without needing to parse screenshots. Pass a CSS selector to target a specific " +
+        "section, or omit it to get the full page text.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          selector: {
+            type: "string",
+            description:
+              "Optional CSS selector to extract text from a specific element " +
+              '(e.g., ".job-description", "main"). Defaults to the full page body.',
+          },
+        },
+        required: [],
+      },
+    },
+
+    {
+      name: "browser_scroll",
+      description:
+        "Scrolls the current page up, down, to the top, or to the bottom. " +
+        "Use this to reveal content below the fold before calling browser_get_text " +
+        "or browser_screenshot.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          direction: {
+            type: "string",
+            enum: ["down", "up", "bottom", "top"],
+            description:
+              '"down" / "up" scroll by a fixed amount (default 800px). ' +
+              '"bottom" / "top" jump to the end or start of the page.',
+          },
+          amount: {
+            type: "number",
+            description:
+              "Pixels to scroll when direction is 'down' or 'up'. Defaults to 800.",
+          },
+        },
+        required: ["direction"],
+      },
+    },
+
+    {
       name: "dev_login",
       description:
         "Navigates to a login page, fills in credentials using native input events " +
@@ -382,6 +429,65 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: "text",
               text: `Clicked <${tag}> "${text}" (selector: "${selector}")`,
+            },
+          ],
+        };
+      }
+
+      // ── browser_get_text ────────────────────────────────────────────────────
+      case "browser_get_text": {
+        const selector = args.selector || "body";
+
+        const { result } = await cdp.Runtime.evaluate({
+          expression: `
+            (function () {
+              const el = document.querySelector(${JSON.stringify(selector)});
+              if (!el) return { found: false };
+              return { found: true, text: el.innerText };
+            })()
+          `,
+          returnByValue: true,
+        });
+
+        if (!result.value?.found) {
+          return {
+            content: [
+              { type: "text", text: `No element found for selector: ${selector}` },
+            ],
+            isError: true,
+          };
+        }
+
+        return {
+          content: [{ type: "text", text: result.value.text }],
+        };
+      }
+
+      // ── browser_scroll ──────────────────────────────────────────────────────
+      case "browser_scroll": {
+        const { direction, amount = 800 } = args;
+
+        const expression = direction === "top"
+          ? "window.scrollTo(0, 0);"
+          : direction === "bottom"
+          ? "window.scrollTo(0, document.body.scrollHeight);"
+          : direction === "up"
+          ? `window.scrollBy(0, -${amount});`
+          : `window.scrollBy(0, ${amount});`;
+
+        await cdp.Runtime.evaluate({ expression });
+        await new Promise((r) => setTimeout(r, 300));
+
+        const { result: posResult } = await cdp.Runtime.evaluate({
+          expression: "Math.round(window.scrollY)",
+          returnByValue: true,
+        });
+
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Scrolled ${direction}. Current scroll position: ${posResult.value}px from top.`,
             },
           ],
         };
