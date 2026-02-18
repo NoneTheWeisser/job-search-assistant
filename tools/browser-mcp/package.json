@@ -1,0 +1,14 @@
+{
+  "name": "job-search-browser-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Chrome DevTools Protocol MCP server for Job Search Assistant browser testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "chrome-remote-interface": "^0.33.2"
+  }
+}

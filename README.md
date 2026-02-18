@@ -28,7 +28,7 @@ A Claude Code-powered job search tracker and career assistant built for a junior
 .
 ├── CLAUDE.md                # Agent instructions, user profile, and criteria
 ├── schema.sql               # Database schema (job_listings table)
-├── prompts/
+├── agents/
 │   ├── cover-letter.md          # Cover letter subagent (dev roles)
 │   ├── design-cover-letter.md   # Cover letter subagent (design roles)
 │   ├── interview-prep.md        # Interview prep subagent (dev or design)
