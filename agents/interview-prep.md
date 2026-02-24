@@ -40,6 +40,8 @@ Research the company using the `WebSearch` tool (NOT Firecrawl). Provide:
 
 Keep this brief and useful. Skip anything you can't verify.
 
+Use inline numbered citations for every fact drawn from a source. Place the citation marker immediately after the fact, like this: `[1]`. Each unique source gets its own number. Reuse the same number if the same source is cited again.
+
 ### 2. Technical Questions
 
 Generate 6-8 questions the interviewer is likely to ask based on the tech stack and requirements in the listing. For each question:
@@ -77,6 +79,22 @@ Suggest 4-5 thoughtful questions the user can ask the interviewer. These should:
 - Be tailored to the specific company and position (not generic)
 - Include at least one about team structure or development process
 - Include at least one about growth or learning opportunities (relevant for a junior role)
+
+### Works Cited
+
+At the very end of the document, include a **Works Cited** section listing every source referenced throughout the prep sheet. Format each entry as:
+
+```
+[N]. "Page Title." Company or Site Name. URL
+```
+
+Example:
+```
+[1]. "About Us." Acme Corp. https://acme.com/about
+[2]. Crunchbase profile. Crunchbase. https://crunchbase.com/organization/acme
+```
+
+Number entries in the order they first appear in the document. Every inline citation must have a corresponding entry here.
 
 ## Style Rules
 
