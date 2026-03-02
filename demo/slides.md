@@ -77,6 +77,8 @@ style: |
 
 # How It Works
 
+![bg right:55% fit](./images/lake.png)
+
 - **CLAUDE.md** — Full user profile, criteria, and dealbreakers as the system prompt
 - **MCP: Postgres** — Persistent job tracker. Status, fit verdicts, rejection notes.
 - **MCP: Firecrawl + Browser** — Paste a URL, agent scrapes it automatically
@@ -85,6 +87,8 @@ style: |
 ---
 
 # Wins
+
+![bg right:55% fit](./images/prep.png)
 
 - **One URL → full evaluation** — Scrape, score fit, save to database. No manual entry.
 - **Cover letters in seconds** — Pulls from the stored listing, knows your background, drafts something tailored

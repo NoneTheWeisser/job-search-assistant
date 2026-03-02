@@ -17,7 +17,7 @@
 
 ## Slide 3 — How It Works (25 sec)
 
-> "The whole thing runs inside Cursor. The system prompt — a file called CLAUDE.md — has my full background, target roles, tech stack, and dealbreakers baked in. From there it connects to two MCP servers: one for a Postgres database that tracks all my listings, and one for web scraping so I just paste a URL and it pulls the listing automatically. For bigger tasks like writing cover letters or building interview prep sheets, it spins up dedicated subagents with their own prompts."
+> "It's built around a file called CLAUDE.md — that's the system prompt, and it has my full background, target roles, tech stack, and dealbreakers baked in. From there it connects to two MCP servers: one for a Postgres database that tracks all my listings, and one for web scraping so I just paste a URL and it pulls the listing automatically. For bigger tasks like writing cover letters or building interview prep sheets, it spins up dedicated subagents with their own prompts."
 
 ---
 
@@ -25,7 +25,7 @@
 
 > "The part I'm most happy with is how much of the workflow collapsed into a single step. Paste a URL, agent scrapes it, scores it against my profile, and either saves it or tells me why it's not a fit — no copy-pasting, no manual entry."
 
-> "Cover letters used to take me 30-45 minutes each. Now I just say 'write a cover letter for the FCCU role' and it drafts something that actually references my background correctly."
+> "Cover letters used to take me 30-45 minutes each. Now I just say 'write a cover letter for the Lake Shirt role,' and it drafts something that actually references my background correctly."
 
 > "Interview prep is probably the most useful output. It does company research, generates technical questions based on the role, writes STAR-format behavioral answers, and includes career-change talking points. All exported to a markdown file I can review the night before."
 
