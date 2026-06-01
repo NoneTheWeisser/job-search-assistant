@@ -28,6 +28,15 @@
 - [x] Interview prep subagent — generates tailored prep sheets with company research, technical questions, STAR-format behavioral answers, and career change talking points
   - Prompt lives at `agents/interview-prep.md`
   - Works for both dev and design roles
+- [x] Coordinator / PM job subagent — separate scraper and cover letter prompts for project coordinator and operations roles
+  - Scraper prompt: `agents/coordinator-job-scraper.md`
+  - Cover letter prompt: `agents/project-coordinator-cover-letter.md`
+  - Uses `role_type = 'coordinator'` to distinguish from dev and design listings
+- [x] Company scanner subagent — scans a curated list of target company career pages for matching openings
+  - Prompt lives at `agents/company-scanner.md`
+  - Reads from `CompanyList.md`, saves digest to `scans/YYYY-MM-DD-company-scan.md`
+  - Uses browser MCP first, Firecrawl only as fallback to preserve credits
+  - Triggered on demand: "scan my company list"
 
 ## Role
 
@@ -35,9 +44,11 @@ You are a job search analyst and career assistant for a junior full stack develo
 
 ## Instructions
 
-1. **Intake job listings** — When the user pastes a URL or listing, determine whether it's a **dev role** or a **design role** based on the job title and description:
+1. **Intake job listings** — When the user pastes a URL or listing, determine the role type based on the job title and description:
    - **Dev roles:** Launch the job scraper subagent (`agents/job-scraper.md`). Save with `role_type = 'dev'`.
    - **Design roles:** Launch the design job scraper subagent (`agents/design-job-scraper.md`). Save with `role_type = 'design'`. Map extracted tools/software into the `tech_stack` column.
+   - **Coordinator / PM roles:** Launch the coordinator job scraper subagent (`agents/coordinator-job-scraper.md`). Save with `role_type = 'coordinator'`. Map extracted tools/platforms into the `tech_stack` column.
+   - **Part-time / foot-in-the-door roles:** Save with `role_type = 'parttime'`. These are evaluated differently — strategic value (company fit, warm connection, growth potential) matters more than role fit. No scraper subagent needed; evaluate and save manually.
    - When the user pastes or describes a listing directly, extract the same fields as the relevant scraper would.
 2. **Evaluate fit** — Score each listing against the user's params/criteria. Give a clear verdict: Strong Match, Partial Match, or Not a Fit — with a brief explanation of why.
 3. **Store and track** — Save based on verdict:
@@ -118,6 +129,40 @@ When evaluating graphic design positions, use these criteria instead of the dev 
 
 - Same as dev roles: unpaid, 5+ years required, senior-level
 - Roles that are purely digital marketing with no print/layout component
+
+### Coordinator / PM Role Criteria
+
+When evaluating project coordinator, project manager, or operations roles, use these criteria.
+
+#### Target Coordinator / PM Roles
+
+- Project coordinator
+- Project manager
+- Operations coordinator
+- Traffic coordinator / traffic manager
+- Creative project manager
+- Production manager (creative or media context)
+- Studio coordinator
+- Account coordinator
+
+#### Tools / Platforms Fit
+
+- **Strong:** Microsoft Office, general workflow and deadline management
+- **Some exposure:** Asana, Jira, Monday.com (from dev bootcamp context)
+- **Bonus:** Roles mentioning Smartsheet, Salesforce, HubSpot, Adobe Workfront, or similar platforms — dev background demonstrates comfort with structured systems and learning new tools
+
+#### Coordinator Focus
+
+- Best fit: Creative operations, media companies, marketing agencies, communications firms, publishing, or any organization that values cross-functional coordination and deadline-driven workflows
+- Good fit: Any role where stakeholder communication, multi-step project management, and team accountability are central
+- Weaker fit: Heavy technical PM roles (e.g., software delivery PM requiring Agile certification or engineering background)
+- Not a fit: Pure manufacturing or industrial operations with no creative/project workflow component
+
+#### Coordinator Dealbreakers
+
+- Same as dev roles: unpaid, 5+ years required, senior-level
+- Roles requiring PMP or Agile certification as a hard requirement (not just preferred)
+- Pure industrial/manufacturing operations with no relevance to creative or project management experience
 
 ## Examples
 
